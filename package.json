@@ -1,0 +1,25 @@
+{
+  "name": "zlChat-websocket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start":"node server.js",
+    "postinstall":"npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "chat",
+    "websocket"
+  ],
+  "author": "zoulei",
+  "license": "ISC",
+  "devDependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.5.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express-session": "^1.15.1"
+  }
+}

@@ -1,0 +1,49 @@
+.message {
+    display:none;
+    padding:10px;
+    background-color: #fff;
+    margin-top: 50px;
+}
+.number {
+    font:600 20px/24px "黑体";
+    color: #27181a;
+}
+.login_registe {
+    background-color: #fff;
+    padding:10px;
+    margin-top: 50px;
+    font-weight: 500 ;
+}
+.tab {
+    border: 1px solid #ddd;
+    border-top: none;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 0 0 5px 5px;
+
+}
+.tab_a {
+    font:500 18px/20px "microsoft yahei";
+    text-decoration: none;
+}
+
+.login_box,.registe-box {
+    width:100%;
+    height:100%;
+}
+.form-group {
+    /*width:100%;*/
+
+}
+#l_userNum,#l_password,#r_username,#r_password,#confirmpwd {
+    width:100%;
+    height:40px;
+    outline:none;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    padding: 0 5px;
+}
+#loginBtn,
+#registeBtn {
+    width:90%;margin-left: 5%;
+}

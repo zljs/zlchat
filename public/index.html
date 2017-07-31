@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,
+                                     initial-scale=1.0,
+                                     maximum-scale=1.0,
+                                     user-scalable=no">
+    <title>z-chat</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="styles/login.css" />
+    <link rel="stylesheet" type="text/css" href="styles/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="styles/index.css" />
+    <!--[if lt IE 8]><script src="./json3.min.js"></script><![endif]-->
+
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+    <!-- 登录注册模块 -->
+    <div class="container-fluid " id="login_registe_js">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <section class="message"></section>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4  login_registe">
+                <ul class="nav nav-tabs">
+                    <li class="active" id="login_tab"><a href="#login" data-toggle="tab" class="tab_a">登录</a></li>
+                    <li id="registe_tab"><a href="#registe" data-toggle="tab" class="tab_a">注册</a></li>
+                </ul>
+                <div class="tab-content tab">
+                    <div id="login" class="tab-pane active">
+                        <form action="#" method="post" class="form-horizontal">
+                            <div class="login-box">
+                                <div class="form-group has-success ">
+                                    <label class="col-sm-3 control-label" for="l_username">
+                                        用户名：
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" placeholder="请输入登录号码" id="l_userNum" name="username" maxlength='20' class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group has-success ">
+                                    <label class="col-sm-3 control-label" for="l_password">
+                                        密码：
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="password" placeholder="请输入密码" id="l_password" name="password" maxlength='16' class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <input type="button" class="btn btn-primary " id="loginBtn" value="登录" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="registe" class="tab-pane">
+                        <form action="#" method="post" class="form-horizontal">
+                            <div class="login-box">
+                                <div class="form-group has-success ">
+                                    <label class="col-sm-3 control-label" for="l_username">
+                                        用户名：
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="text" placeholder="请输入用户名" id="r_username" name="username" maxlength='10' class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group has-success ">
+                                    <label class="col-sm-3 control-label" for="l_password">
+                                        密码：
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="password" placeholder="请输入密码" id="r_password" name="password" maxlength='16' class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group has-success ">
+                                    <label class="col-sm-3 control-label" for="l_password">
+                                        确认密码：
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <input type="password" id="confirmpwd" name="confirmpwd" placeholder="确认密码" class="form-control" />
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <input type="button" class="btn btn-primary" id="registeBtn" value="注册" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 聊天室模块 -->
+    <div id="wrapper">
+        <div class="col-md-2  column">
+            <!-- <div class="overlay"></div> -->
+            <div class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                <ul class="nav sidebar-nav userList">
+                    <li class="sidebar-brand self">
+                        self
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+            <span class="newTip"><span>消息<i></i></span></span>
+            <div class="container-fluid">
+                <div id="chat_wrap">
+                    <div id="chat">
+                        <div id="chat_header">
+                            <div class="row">
+                                <div class="col-lg-12 text">正在与<span class="to">...</span>聊天
+
+                                </div>
+                            </div>
+                        </div>
+                        <div id="message_box">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div id="showMsg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="banner">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <textarea id="msg" name="msg"></textarea>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="banner">
+                                        <input type="file" accept="image/*;capture=camera" class="hidden" id="photo">
+                                        <a href="javascript:;" class="emotion glyphicon glyphicon-apple" id="emotion"></a>
+                                        <a href="javascript:;" class="emotion glyphicon glyphicon-picture" id="img"></a>
+                                        <a href="javascript:;" class="glyphicon glyphicon-send pull-right" id="send"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pop" id="previewBox">
+                    <img src="" id="preview">
+                    <a href="javascript:;" class="btn btn-primary" id="sendImg">发送</a>
+                    <!-- <button class="btn btn-primary">全屏</button> -->
+                </div>
+                <div class="pop" id="scan">
+                    <img src="" class="ab-center" id="check">
+                    <!-- <button class="btn btn-primary">全屏</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+        <script type="text/javascript" src="javascripts/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="javascripts/navbar.js"></script>
+    <script type="text/javascript" src="javascripts/jquery.qqFace.js"></script>
+    <script type="text/javascript" src="javascripts/client.js"></script>
+</body>
+
+</html>
